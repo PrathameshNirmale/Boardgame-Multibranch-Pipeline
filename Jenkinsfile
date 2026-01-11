@@ -1,28 +1,32 @@
 pipeline {
-    agent {label 'slave-1'}
-    
-    tools {
-        maven 'maven3'
-        jdk 'jdk17'
+    agent {
+        label 'slave-1'
     }
-
-    stages {     
-        stage('Compile') {
+    tools {
+        maven 'maven-3.9'
+        jdk 'jdk-11'
+    }
+    stages {
+        stage('git-repo') {
             steps {
-               sh "mvn compile"
+                git branch: 'main', url: 'https://github.com/PrathameshNirmale/Boardgame-Multibranch-Pipeline.git'
             }
         }
-        
-        stage('Test') {
+        stage(compile) {
             steps {
-                sh "mvn test"
+                sh 'mvn compile'
             }
         }
-        
-        stage('Build') {
+        stage('test') {
             steps {
-                sh "mvn package"
+                sh 'mvn test'
+            }
+        }
+        stage('package') {
+            steps {
+                sh 'mvn package'
             }
         }
     }
 }
+

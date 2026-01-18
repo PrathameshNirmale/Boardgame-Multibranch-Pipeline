@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('git-repo') {
             steps {
-                git branch: 'qa', url: 'https://github.com/PrathameshNirmale/Boardgame-Multibranch-Pipeline.git'
+                git branch: 'pre-prod', url: 'https://github.com/PrathameshNirmale/Boardgame-Multibranch-Pipeline.git'
             }
         }
         stage(compile) {
